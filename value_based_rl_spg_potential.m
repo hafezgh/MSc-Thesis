@@ -170,7 +170,7 @@ end
 
 l1_mean = mean(l1_acc,2);
 l1_std = sqrt(var(l1_acc,0,2));
-converged_iter
+
 
 v_iter_mean = mean(v_iter,4);
 v_iter_std = sqrt(var(v_iter,0,4));
@@ -178,7 +178,7 @@ q_iter_mean = mean(q_iter,5);
 q_iter_std = sqrt(var(q_iter,0,5));
 
 
-figure
+h=figure;
 plot_ind = 1:length(iter_save);
 x_label_ind = ceil(linspace(1,length(plot_ind),5));
 % log
@@ -209,9 +209,19 @@ xlabel('Iterations')
 ylabel('L1-accuracy')
 set(gca,'FontSize',16)
 
+if n_players == 8
+    print(h,'res_cong1_p8','-dpdf','-r0')
+end
+
+if n_players == 4
+    print(h,'res_cong1_p4','-dpdf','-r0')
+end
+
+
 lw = 1.5;
 win=15;
-figure
+
+h=figure;
 for i=1:trial_num
 plot(LL_plot,movavg(l1_acc(:,i),'exponential',win),'linewidth',lw);
 hold on
@@ -222,6 +232,18 @@ xlim([min(LL_plot) inf])
 xlabel('Iterations')
 ylabel('L1-accuracy')
 set(gca,'FontSize',16)
+
+set(h,'Units','Inches');
+pos = get(h,'Position');
+set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+
+if n_players == 8
+    print(h,'res_cong2_p8','-dpdf','-r0')
+end
+
+if n_players == 4
+    print(h,'res_cong2_p4','-dpdf','-r0')
+end
 
 
 toc

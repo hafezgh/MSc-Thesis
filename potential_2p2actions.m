@@ -163,7 +163,7 @@ policy_p2 = zeros(n_states, n_actions);
 plot_ind = 1:num_save_iters;
 x_label_ind = ceil(linspace(1,length(plot_ind),5));
 
-figure
+h=figure;
 x_vector = [iter_save(plot_ind), fliplr(iter_save(plot_ind))];
 iter_save_plot = iter_save(plot_ind);
 %set(gca,'XTick',iter_save_plot(x_label_ind),'XTickLabel',iter_save(x_label_ind));
@@ -190,6 +190,11 @@ legend([p1a1,p2a1,p1a2,p2a2],...
 xlabel('Iterations')
 ylabel('local Q values')
 set(gca,'FontSize',16)
+
+set(h,'Units','Inches');
+pos = get(h,'Position');
+set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+print(h,'pot2p2a','-dpdf','-r0')
 toc
 
 %% Saving

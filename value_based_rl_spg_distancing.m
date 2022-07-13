@@ -164,7 +164,9 @@ q_iter_mean = mean(q_iter,5);
 q_iter_std = sqrt(var(q_iter,0,5));
 
 
-figure
+
+
+h = figure;
 plot_ind = 1:length(iter_save);
 x_label_ind = ceil(linspace(1,length(plot_ind),5));
 % log
@@ -195,9 +197,15 @@ xlabel('Iterations')
 ylabel('L1-accuracy')
 set(gca,'FontSize',16)
 
+set(h,'Units','Inches');
+pos = get(h,'Position');
+set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+print(h,'res_dist1','-dpdf','-r0')
+
+
 lw = 1.5;
 win=10;
-figure
+h=figure;
 for i=1:trial_num
 plot(LL_plot,movavg(l1_acc(:,i),'exponential',win),'linewidth',lw);
 hold on
@@ -208,6 +216,11 @@ xlim([min(LL_plot) inf])
 xlabel('Iterations')
 ylabel('L1-accuracy')
 set(gca,'FontSize',16)
+
+set(h,'Units','Inches');
+pos = get(h,'Position');
+set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+print(h,'res_dist2','-dpdf','-r0')
 
 
 toc
